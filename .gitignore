@@ -1,0 +1,6 @@
+*.snap
+*.bz2
+/parts
+/prime
+/stage
+

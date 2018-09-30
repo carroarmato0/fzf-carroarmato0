@@ -1,0 +1,18 @@
+name: fzf-carroarmato0
+version: '0.17.4'
+summary: A command-line fuzzy finder
+description: |
+  fzf is a general-purpose command-line fuzzy finder.
+  It's an interactive Unix filter for command-line that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+apps:
+  fzf:
+    command: fzf
+
+parts:
+  fzf:
+    source: https://github.com/junegunn/fzf-bin/releases/download/${SNAPCRAFT_PROJECT_VERSION}/fzf-${SNAPCRAFT_PROJECT_VERSION}-linux_amd64.tgz
+    plugin: dump
