@@ -1,5 +1,5 @@
 name: fzf-carroarmato0
-version: '0.17.4'
+version: '0.17.5'
 summary: A command-line fuzzy finder
 description: |
   fzf is a general-purpose command-line fuzzy finder.
@@ -7,6 +7,9 @@ description: |
 
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
+
+architectures:
+  - build-on: [amd64]
 
 apps:
   fzf:
