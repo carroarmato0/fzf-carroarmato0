@@ -1,6 +1,6 @@
-name: fzf-carroarmato0
-version: '0.25.1'
-base: core
+name: fzf
+version: 0.25.1
+base: core18
 summary: A command-line fuzzy finder
 description: |
   fzf is a general-purpose command-line fuzzy finder.
@@ -10,16 +10,24 @@ grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 
 architectures:
-  - build-on: [amd64]
+  - build-on: amd64
+  - build-on: arm64
 
 apps:
   fzf:
-    command: fzf
+    command: bin/fzf
     plugs:
       - mount-observe
       - home
 
 parts:
   fzf:
-    source: https://github.com/junegunn/fzf/releases/download/${SNAPCRAFT_PROJECT_VERSION}/fzf-${SNAPCRAFT_PROJECT_VERSION}-linux_amd64.tar.gz
-    plugin: dump
+    go-packages:
+      - github.com/junegunn/fzf
+    go-buildtags:
+      - ${SNAPCRAFT_PROJECT_VERSION}
+    plugin: go
+    source: .
+    source-type: git
+    build-packages:
+      - gcc
