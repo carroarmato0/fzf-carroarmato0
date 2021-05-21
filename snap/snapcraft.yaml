@@ -1,5 +1,5 @@
 name: fzf-carroarmato0
-version: 0.25.1
+version: "0.27.0"
 base: core18
 summary: A command-line fuzzy finder
 description: |
@@ -19,15 +19,22 @@ apps:
     plugs:
       - mount-observe
       - home
+  fzf-tmux:
+    command: bin/fzf-tmux
+    plugs:
+      - mount-observe
+      - home
 
 parts:
   fzf:
-    go-packages:
-      - github.com/junegunn/fzf
-    go-buildtags:
-      - ${SNAPCRAFT_PROJECT_VERSION}
-    plugin: go
-    source: .
+    plugin: make
+    source: https://github.com/junegunn/fzf.git
     source-type: git
+    source-tag: ${SNAPCRAFT_PROJECT_VERSION}
     build-packages:
-      - gcc
+      - golang
+    override-build: |
+      make
+      make install
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      cp bin/* $SNAPCRAFT_PART_INSTALL/bin
